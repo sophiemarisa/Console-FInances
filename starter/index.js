@@ -43,7 +43,7 @@ var finances = [
 ['Jun-2013', 872480],
 ['Jul-2013', 789480],
 ['Aug-2013', 999942],
-['Sep-2013', -1196225],
+['Sep-2013', -1196225]
 ['Oct-2013', 268997],
 ['Nov-2013', -687986],
 ['Dec-2013', 1150461],
@@ -86,3 +86,97 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+var no_months = finances.length; 
+
+var profit = 0;
+var losses = 0;
+var av_change;
+
+var total = 0;
+
+var last_month;
+var monthly_diff = [];
+var diff_val = 0;
+var monthly_diff_sum = 0;
+var monthly_diff_count = 0; 
+
+var biggest_profit_val = 0;
+var biggest_profit_count = 0;
+var biggest_loss_val = 0;
+var biggest_loss_count = 0;
+
+var biggest_profit;
+var biggest_loss;
+
+var array_count = 0;
+
+var analysis;
+
+
+for (let i=0; i < no_months; i++) {
+
+    //gets the money value out of the nested arrays
+    var money_val = finances[i][1];
+
+    //adds the difference between each month to the monthly_diff array
+    if(array_count > 0){
+        diff_val = money_val - last_month;
+        monthly_diff.push(diff_val);
+
+        //if this iterations value is greater than the last
+        if(diff_val > 0){
+
+            
+
+            biggest_profit_val = monthly_diff;
+            biggest_profit_count = array_count;
+        }
+        //if this iterations value is less than the last
+        else if(diff_val < 0){
+            biggest_loss_val = monthly_diff;
+            biggest_loss_count = array_count;
+        }
+    }
+
+    //profts vs losses 
+    if(money_val > 0){
+        profit = profit + money_val;
+    }
+    else if(money_val < 0){
+        losses = losses + money_val;
+    }
+
+    array_count++;
+
+    //saves the current month to be used for the difference in the next loop
+    last_month = money_val;
+}
+
+
+for (let k=0; k < monthly_diff.length; k++) {
+    monthly_diff_sum = monthly_diff_sum + monthly_diff[k];
+}
+
+total = profit + losses;
+
+av_change = (monthly_diff_sum / monthly_diff.length).toFixed(2);
+
+biggest_profit = finances[biggest_profit_count];
+biggest_loss = finances[biggest_loss_count];
+
+
+
+
+analysis = 'Financial Analysis' + '\n' 
+           + '----------------------' + '\n' 
+           + 'Total Months: ' + no_months + '\n' 
+           + 'Total: £' + total + '\n' 
+           + 'Average Change: -£' + (av_change *-1) + '\n' 
+           + 'Greatest Increase: ' + biggest_profit[0] + ':  £' + biggest_profit[1] + '\n' 
+           + 'Greatest Decrease: ' + biggest_loss[0] + ':  -£' + biggest_loss[1]
+           ;
+
+
+console.log(analysis);
+            
