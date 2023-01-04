@@ -121,9 +121,7 @@ for (let i = 0; i < no_months; i++) {
 
     //adds the difference between each month to the monthly_diff array
 
-    console.log(count);
-
-    if (count = 1) {
+    if (count === 1) {
         diff_val = money_val - last_month;
         monthly_diff.push(diff_val);
 
@@ -160,10 +158,9 @@ for (let i = 0; i < no_months; i++) {
     //saves the current month to be used for the difference in the next loop
     last_month = money_val;
 
-}
+    count++;
 
-count++;
-console.log(count);
+}
 
 
 for (let k = 0; k < monthly_diff.length; k++) {
@@ -179,14 +176,13 @@ biggest_loss = finances[biggest_loss_count];
 
 
 
-
 analysis = 'Financial Analysis' + '\n'
     + '----------------------' + '\n'
     + 'Total Months: ' + no_months + '\n'
     + 'Total: £' + total + '\n'
     + 'Average Change: -£' + (av_change * -1) + '\n'
-    + 'Greatest Increase: ' + biggest_profit[0] + ':  £' + biggest_profit[1] + '\n'
-    + 'Greatest Decrease: ' + biggest_loss[0] + ':  -£' + biggest_loss[1]
+    + 'Greatest Increase: ' + biggest_profit[0] + ' - there was an increase of: £' + biggest_profit_val + '\n'
+    + 'Greatest Decrease: ' + biggest_loss[0]  + ' - there was a decrease of: -£' + (biggest_loss_val*-1)
     ;
 
 
